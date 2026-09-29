@@ -25,5 +25,23 @@ public class SerieService {
         );
     }
 
+    public void deletarSeriePorGenero(String genero){
+        repository.deleteByGenero(genero);
+    }
+
+    public void atualizarPorId(Integer id,Serie serie){
+        Serie serieEntity = repository.findById(id).orElseThrow(() -> new RuntimeException("Serie nao encontrada"));
+        Serie serieAtualizado = Serie.builder()
+                .nome(serie.getNome()!=null ? serie.getNome() : serieEntity.getNome())
+                .genero(serie.getGenero()!=null ? serie.getGenero() : serieEntity.getGenero())
+                .plataforma(serie.getPlataforma()!=null ? serie.getPlataforma() : serieEntity.getPlataforma())
+                .anoLancamento(serie.getAnoLancamento()!=null ? serie.getAnoLancamento() : serieEntity.getAnoLancamento())
+                .id(serieEntity.getId())
+                .build();
+
+        repository.saveAndFlush(serieAtualizado);
+    }
+
+
 
 }
