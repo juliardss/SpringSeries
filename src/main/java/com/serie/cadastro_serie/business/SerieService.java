@@ -29,7 +29,7 @@ public class SerieService {
         repository.deleteByGenero(genero);
     }
 
-    public void atualizarPorId(Integer id,Serie serie){
+    public void atualizarSeriePorId(Integer id,Serie serie){
         Serie serieEntity = repository.findById(id).orElseThrow(() -> new RuntimeException("Serie nao encontrada"));
         Serie serieAtualizado = Serie.builder()
                 .nome(serie.getNome()!=null ? serie.getNome() : serieEntity.getNome())
